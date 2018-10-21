@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Tasks from '../TasksTable/TasksTable.container';
 import Drivers from '../DriversList/DriversList.container';
+import Map from '../Map/Map.container'
 
 import logo from '../../logo.svg';
 import './App.css';
@@ -12,7 +13,10 @@ class App extends Component {
         return (
             <div className="App">
                 <p>Bringg</p>
-                <Drivers/>
+                <div className='flexbox-container'>
+                    <Drivers/>
+                    <Map/>
+                </div>
                 <Tasks/>
 
             </div>

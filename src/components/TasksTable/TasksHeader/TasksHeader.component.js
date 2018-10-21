@@ -11,8 +11,8 @@ class TasksHeader extends Component {
                     <th>Scheduled for</th>
                     <th>Assigned to</th>
                     <th>Address</th>
-                    <th>Lat</th>
-                    <th>Lon</th>
+                    {/*<th>Lat</th>
+                    <th>Lon</th>*/}
                     <th>Locate on map</th>
                     <th>Show on map</th>
                 </tr>

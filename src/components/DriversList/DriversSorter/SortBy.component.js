@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import './SortBy.scss';
+
 const SortBy = ({onSortByChange, onSortOrderChange}) =>{
     let renderSortOrderSelector = () => {
         return (
@@ -22,9 +24,9 @@ const SortBy = ({onSortByChange, onSortOrderChange}) =>{
     }
 
     return (
-        <div>
-            Sort by: {renderSortBySelector()}
-            Sort method: {renderSortOrderSelector()}
+        <div className='sorter'>
+            <span className='sort-selector'>Sort by: {renderSortBySelector()}</span>
+            <span className='sort-selector'>Sort method: {renderSortOrderSelector()}</span>
         </div>
     );
 }

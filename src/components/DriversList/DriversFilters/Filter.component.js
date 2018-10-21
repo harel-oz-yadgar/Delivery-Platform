@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
 
+import './Filter.scss'
+
 
 class Filter extends Component {
     constructor(props){
@@ -20,10 +22,11 @@ class Filter extends Component {
     render() {
         return (
             <div className='filter'>
-                <span className='filter-by-text'>Filter by {this.props.text}:</span>
+                <span className='filter-heading'>Filter by {this.props.text}:</span>
                 <input type="text"
                        value={this.state.value}
                        onChange={this.handleChange}
+                       className='filter-input'
                 />
             </div>
         );

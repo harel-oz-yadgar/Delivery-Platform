@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import DriversList from './DriversList.component';
-import Filters from './DriversFilters/DriversFilters.component';
-import Sort from './DriversSorter/SortBy.component';
-
 import {loadDrivers, deleteDriver, changeFilter} from '../../store/actions/driversActions/driversActions';
 import {toStringName, filterDrivers} from './../../assets/utils';
 
@@ -69,16 +66,13 @@ class DriversListContainer extends Component {
         drivers = this.calcTasksForDriver(drivers);
 
         return (
-            <div>
-                <Filters onFilterChange={this.props.changeFilter}/>
-                <Sort onSortByChange={this.changeSortBy}
-                      onSortOrderChange={this.changeSortOrder}
-                />
-                <DriversList isLoading={this.props.isLoading}
+            <DriversList isLoading={this.props.isLoading}
                              drivers={drivers}
                              onDeleteDriver={this.props.deleteDriver}
-                />
-            </div>
+                             onFilterChange={this.props.changeFilter}
+                             onSortByChange={this.changeSortBy}
+                             onSortOrderChange={this.changeSortOrder}
+            />
         );
     }
 }

@@ -16,8 +16,8 @@ const Task = ({task, toggleDisplay}) => {
                                   assignedTo={task.driverId}/>
             </td>
             <td>{task.address}</td>
-            <td>{task.location.latitude}</td>
-            <td>{task.location.longitude}</td>
+            {/*<td>{task.location.latitude}</td>
+            <td>{task.location.longitude}</td>*/}
             <td><button type='button'>Locate</button></td>
             <td><button type='button' onClick={()=>toggleDisplay(task._id)}>{task.display? 'hide':'show'}</button></td>
         </tr>
