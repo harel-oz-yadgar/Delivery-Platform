@@ -1,32 +1,27 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import TwoButtonSelector from '../../TwoButtonSelector/TwoButtonSelector.component';
+
 import './SortBy.scss';
 
 const SortBy = ({onSortByChange, onSortOrderChange}) =>{
-    let renderSortOrderSelector = () => {
-        return (
-            <select onChange={(event)=>onSortOrderChange(event.target.value)}>
-                <option value='asc'>asc</option>
-                <option value='des'>des</option>
-            </select>
-        );
-    }
-
-    let renderSortBySelector = () => {
-        return (
-            <select onChange={(event)=>onSortByChange(event.target.value)}>
-                <option value='none'>none</option>
-                <option value='name'>Name</option>
-                <option value='age'>Age</option>
-            </select>
-        );
-    }
-
     return (
         <div className='sorter'>
-            <span className='sort-selector'>Sort by: {renderSortBySelector()}</span>
-            <span className='sort-selector'>Sort method: {renderSortOrderSelector()}</span>
+            <span className='text'>Sort by</span>
+            <TwoButtonSelector textA='Name'
+                               retValA='name'
+                               textB='Age'
+                               retValB='age'
+                               onClick={onSortByChange}
+            />
+            <span className='text'>order</span>
+            <TwoButtonSelector textA='ASC'
+                               retValA='asc'
+                               textB='DES'
+                               retValB='des'
+                               onClick={onSortOrderChange}
+            />
         </div>
     );
 }

@@ -15,10 +15,12 @@ const DriversList  = ({isLoading, drivers, onDeleteDriver, onFilterChange, onSor
                 <Loader text="Drivers"/>
                 :
                 <div className='drivers-list'>
-                    <Filters onFilterChange={onFilterChange}/>
-                    <Sort onSortByChange={onSortByChange}
-                          onSortOrderChange={onSortOrderChange}
-                    />
+                    <div className='driver-list-manage'>
+                        <Filters onFilterChange={onFilterChange}/>
+                        <Sort onSortByChange={onSortByChange}
+                              onSortOrderChange={onSortOrderChange}
+                        />
+                    </div>
                     <div className='drivers-list-content'>
                         {
                             drivers.map(driver => {
