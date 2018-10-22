@@ -2,28 +2,24 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { ReactBingmaps } from 'react-bingmaps';
 
-import {toStringName} from '../../assets/utils'
+import {filterDrivers, filterTasks, toStringName, parseLocation} from '../../assets/utils'
 import './Map.scss';
 
 class MapContainer extends Component {
-    constructor(props){
-        super(props);
-    }
 
-    buildPinWithIcon = (lat, lon, title, icon) => {
+    buildPinWithIcon = (location, title, icon) => {
         return {
-            "location":[lat, lon],
+            "location": location,
             "option":{
                 title: title,
                 icon: icon
             },
-            //"addHandler": {"type" : "click", callback: this.callBackMethod }
         }
     }
 
-    buildPin = (lat, lon, title) => {
+    buildPin = (location, title) => {
         return {
-            "location": [lat, lon],
+            "location": location,
             "option": {
                 title: title,
                 color: 'red',
@@ -36,8 +32,7 @@ class MapContainer extends Component {
         return drivers.map(driver => {
             const {location, name, picture} = driver;
             return this.buildPinWithIcon(
-                parseFloat(location.latitude),
-                parseFloat(location.longitude),
+                parseLocation(location),
                 toStringName(name),
                 picture
             );
@@ -48,28 +43,40 @@ class MapContainer extends Component {
         return tasks.map(task => {
             const {location, title} = task;
             return this.buildPin(
-                parseFloat(location.latitude),
-                parseFloat(location.longitude),
+                parseLocation(location),
                 title
             );
         });
     }
 
-    render(){
-        const initialMapCenter = [32.106564, 34.834298];//Habarzel 1, ramat hahaial
+    removeHiddenTasks = (tasks) => {
+        return tasks.filter(task=>task.display);
+    }
 
-        let {drivers, tasks} = this.props;
+    render(){
+        let {drivers, tasks, isLoading, nameFilter, ageFilter} = this.props;
+        drivers = filterDrivers(drivers, nameFilter, ageFilter);
+        tasks = filterTasks(tasks, drivers, nameFilter, ageFilter);
+        tasks = this.removeHiddenTasks(tasks);
+
         const driversPins = this.mapDriversToPins(drivers);
         const tasksPins = this.mapTasksToPins(tasks);
 
         return (
             <div className='map-container'>
-                <ReactBingmaps
-                    bingmapKey = "Ag19x9j8CnU4DSeAUU4LUIKDLy0yDQUw3khYUyvNZCMOKOcPNSXrB_XfYnHyweff"
-                    center={initialMapCenter}
-                    pushPins={[...driversPins, ...tasksPins]}
-                >
-                </ReactBingmaps>
+                {
+                    isLoading ? '' :
+                        <ReactBingmaps
+                            bingmapKey = "Ag19x9j8CnU4DSeAUU4LUIKDLy0yDQUw3khYUyvNZCMOKOcPNSXrB_XfYnHyweff"
+                            center={this.props.center}
+                            zoom={18}
+                            pushPins={[...driversPins, ...tasksPins]}
+                            getLocation = {
+                                {addHandler: "click", callback:(e)=>{console.log(e)}}
+                            }
+                        />
+                }
+
             </div>
         );
     }
@@ -77,7 +84,11 @@ class MapContainer extends Component {
 
 const mapStateToProps = (state) => ({
     drivers: state.drivers.drivers,
-    tasks: state.tasks.tasks
+    tasks: state.tasks.tasks,
+    isLoading: state.tasks.isLoading && state.drivers.isLoading,
+    nameFilter: state.drivers.filters.name,
+    ageFilter: state.drivers.filters.age,
+    center: state.map.center,
 });
 
 const mapDispatchToProps = (dispatch) => ({

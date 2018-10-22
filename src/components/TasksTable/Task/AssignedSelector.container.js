@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import PropTypes from "prop-types";
 
-import {assignTask} from '../../../store/actions/tasksActions/tasksActions'
+import {assignTask} from '../../../store/actions/actions/tasksActions'
 import {toStringName} from '../../../assets/utils'
 
 

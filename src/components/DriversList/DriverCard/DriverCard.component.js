@@ -5,22 +5,20 @@ import {toStringName} from '../../../assets/utils';
 import './DriverCard.scss';
 
 
-const DriverCard  = ({driver, onDelete}) => {
+const DriverCard  = ({driver, onDelete, onLocateDriver}) => {
     return (
         <div className='driver-card'>
-            <div className='driver-data'>
-                <img className='driver-img'
-                     src={driver.picture}
-                     alt={toStringName(driver.name)}
-                />
-                <div className='driver-meta'>
-                    <div className='driver-name'>{toStringName(driver.name)}</div>
-                    <div className='driver-age'>Age: {driver.age}</div>
-                </div>
+            <img className='driver-img'
+                 src={driver.picture}
+                 alt={toStringName(driver.name)}
+            />
+            <div className='driver-meta'>
+                <div className='driver-name'>{toStringName(driver.name)}</div>
+                <div className='driver-age'>Age: {driver.age}</div>
             </div>
-            <div className='extra-zone'>
+            <div className='button-zone'>
                 <span className='button driver-tasks'>Tasks: {driver.tasks}</span>
-                <button className='button locate-driver' type='button'>Locate driver</button>
+                <button className='button locate-driver' type='button' onClick={onLocateDriver}>Locate driver</button>
                 <button className='button delete-driver' type='button' onClick={onDelete}>Delete</button>
             </div>
         </div>

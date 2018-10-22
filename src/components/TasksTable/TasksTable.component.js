@@ -6,7 +6,7 @@ import TasksHeader from './TasksHeader/TasksHeader.component';
 import Task from './Task/Task.component';
 import './TaskTable.scss'
 
-const TasksTable = ({isLoading, tasks, toggleDisplay}) => {
+const TasksTable = ({isLoading, tasks, toggleDisplay, onLocateTask}) => {
     return (
         <div>
         {
@@ -24,6 +24,7 @@ const TasksTable = ({isLoading, tasks, toggleDisplay}) => {
                                     <Task task={task}
                                           toggleDisplay={toggleDisplay}
                                           key={task._id}
+                                          onLocateTask={()=>onLocateTask(task.location)}
                                     />
                                 );
                             })

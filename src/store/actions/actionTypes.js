@@ -7,3 +7,5 @@ export const START_FETCHING_TASKS = 'START_FETCHING_TASKS';
 export const LOAD_TASKS = 'LOAD_TASKS';
 export const ASSIGN_TASK = 'ASSIGN_TASK';
 export const TOGGLE_TASK = 'TOGGLE_TASK';
+
+export const CHANGE_CENTER = 'CHANGE_CENTER';

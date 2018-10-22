@@ -7,7 +7,7 @@ import Filters from "./DriversFilters/DriversFilters.component";
 import Sort from "./DriversSorter/SortBy.component";
 import './DriversList.scss'
 
-const DriversList  = ({isLoading, drivers, onDeleteDriver, onFilterChange, onSortByChange, onSortOrderChange}) => {
+const DriversList  = ({isLoading, drivers, onDeleteDriver, onFilterChange, onSortByChange, onSortOrderChange, onLocateDriver}) => {
     return (
         <div>
         {
@@ -26,6 +26,7 @@ const DriversList  = ({isLoading, drivers, onDeleteDriver, onFilterChange, onSor
                                     <DriverCard driver={driver}
                                                 key={driver._id}
                                                 onDelete={()=>onDeleteDriver(driver._id)}
+                                                onLocateDriver={()=>onLocateDriver(driver.location)}
                                     />
                                 );
                             })

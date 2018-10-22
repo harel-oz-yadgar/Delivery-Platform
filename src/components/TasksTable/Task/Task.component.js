@@ -6,7 +6,7 @@ import {formatDate} from '../../../assets/utils'
 import './Task.css'
 
 
-const Task = ({task, toggleDisplay}) => {
+const Task = ({task, toggleDisplay, onLocateTask}) => {
     return (
         <tr>
             <td>{task.title}</td>
@@ -18,7 +18,7 @@ const Task = ({task, toggleDisplay}) => {
             <td>{task.address}</td>
             {/*<td>{task.location.latitude}</td>
             <td>{task.location.longitude}</td>*/}
-            <td><button type='button'>Locate</button></td>
+            <td><button type='button' onClick={onLocateTask} disabled={!task.display}>Locate</button></td>
             <td><button type='button' onClick={()=>toggleDisplay(task._id)}>{task.display? 'hide':'show'}</button></td>
         </tr>
     );

@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import DriversList from './DriversList.component';
-import {loadDrivers, deleteDriver, changeFilter} from '../../store/actions/driversActions/driversActions';
+
+import {loadDrivers, deleteDriver, changeFilter} from '../../store/actions/actions/driversActions';
+import {zoomLocation} from '../../store/actions/actions/mapAction'
 import {toStringName, filterDrivers} from './../../assets/utils';
 
 
@@ -21,14 +23,12 @@ class DriversListContainer extends Component {
 
     changeSortOrder = (value) => {
         this.setState({
-            ...this.state,
             sortOrder: value,
         });
     }
 
     changeSortBy = (value) => {
         this.setState({
-            ...this.state,
             sortBy: value,
         });
     }
@@ -67,11 +67,12 @@ class DriversListContainer extends Component {
 
         return (
             <DriversList isLoading={this.props.isLoading}
-                             drivers={drivers}
-                             onDeleteDriver={this.props.deleteDriver}
-                             onFilterChange={this.props.changeFilter}
-                             onSortByChange={this.changeSortBy}
-                             onSortOrderChange={this.changeSortOrder}
+                         drivers={drivers}
+                         onDeleteDriver={this.props.deleteDriver}
+                         onFilterChange={this.props.changeFilter}
+                         onSortByChange={this.changeSortBy}
+                         onSortOrderChange={this.changeSortOrder}
+                         onLocateDriver={this.props.locateDriver}
             />
         );
     }
@@ -88,7 +89,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     loadDrivers: () => dispatch(loadDrivers()),
     deleteDriver: (driverId) => dispatch(deleteDriver(driverId)),
-    changeFilter: (filterKey, filterValue) => dispatch(changeFilter(filterKey, filterValue))
+    changeFilter: (filterKey, filterValue) => dispatch(changeFilter(filterKey, filterValue)),
+    locateDriver: (location) => dispatch(zoomLocation(location))
 });
 
 export default connect(

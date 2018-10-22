@@ -2,36 +2,26 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import TasksTable from './TasksTable.component';
-import {loadTasks, toggleDisplay} from '../../store/actions/tasksActions/tasksActions';
-import {filterDrivers} from "../../assets/utils";
+import {loadTasks, toggleDisplay} from '../../store/actions/actions/tasksActions';
+import {filterTasks} from "../../assets/utils";
+import {zoomLocation} from "../../store/actions/actions/mapAction";
 
 class TasksTableContainer extends Component {
     componentDidMount(){
         this.props.loadTasks();
     }
 
-    filterTasks = (tasks) => {
-        let {drivers, nameFilter, ageFilter} = this.props;
-        let filteredDrivers = filterDrivers(drivers, nameFilter, ageFilter);
 
-        if(nameFilter==='' && ageFilter===''){
-            return tasks;
-        }
-
-        tasks = tasks.filter(task => {
-            return filteredDrivers.some(driver => driver._id===task.driverId)
-        })
-        return tasks;
-    }
 
     render() {
-        let {tasks} = this.props;
-        tasks = this.filterTasks(tasks);
+        let {tasks, drivers, nameFilter, ageFilter} = this.props;
+        tasks = filterTasks(tasks, drivers, nameFilter, ageFilter);
 
         return (
             <TasksTable isLoading={this.props.isLoading}
                         tasks={tasks}
                         toggleDisplay={this.props.toggleDisplay}
+                        onLocateTask={this.props.locateTask}
             />
         );
     }
@@ -48,6 +38,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
     loadTasks: () => dispatch(loadTasks()),
     toggleDisplay: (taskId) => dispatch(toggleDisplay(taskId)),
+    locateTask: (location) => dispatch(zoomLocation(location))
 })
 
 export default connect(

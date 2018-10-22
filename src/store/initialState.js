@@ -11,4 +11,7 @@ export default {
         isLoading: false,
         tasks: [],
     },
+    map: {
+        center: [32.106564, 34.834298]//Habarzel 1, ramat hahaial
+    }
 }
