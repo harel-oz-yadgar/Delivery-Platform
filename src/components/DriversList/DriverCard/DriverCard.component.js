@@ -18,8 +18,15 @@ const DriverCard  = ({driver, onDelete, onLocateDriver}) => {
             </div>
             <div className='button-zone'>
                 <span className='button driver-tasks'>Tasks: {driver.tasks}</span>
-                <button className='button locate-driver' type='button' onClick={onLocateDriver}>Locate driver</button>
-                <button className='button delete-driver' type='button' onClick={onDelete}>Delete</button>
+                <button className='button locate-driver clickable'
+                        type='button'
+                        onClick={onLocateDriver}>
+                    <span className='locate-driver-text'>
+                        Locate
+                    </span>
+                    <img className='search-icon' src='https://static.thenounproject.com/png/101791-200.png' alt=''/>
+                </button>
+                <button className='button delete-driver clickable' type='button' onClick={onDelete}>Delete</button>
             </div>
         </div>
     );

@@ -22,8 +22,8 @@ class Filter extends Component {
     render() {
         return (
             <div className='filter'>
-                <span className='filter-heading'>Filter by {this.props.text}:</span>
                 <input type="text"
+                       placeholder={`Filter by ${this.props.text}`}
                        value={this.state.value}
                        onChange={this.handleChange}
                        className='filter-input'

@@ -1,14 +1,15 @@
 .filter{
   display: flex;
-  justify-content: space-between;
-
-  .filter-heading{
-    margin: 2px 10px 2px 3px;
-  }
+  justify-content: flex-start;
 
   .filter-input{
+    font-size: 18px;
+    width: 70%;
+    padding-left: 3px;
     margin-top: 2px;
     margin-right: 30px;
-    height: 15px;
+    margin-bottom: 6px;
+    height: 20px;
+    border: 1px solid #ddd;
   }
 }
