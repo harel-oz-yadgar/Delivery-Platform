@@ -1,0 +1,19 @@
+.switch {
+  padding: 4px 5px;
+  background-color: #555555;
+
+  .button {
+    border: 0px solid;
+    padding: 2px 7px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    background-color: #555555;
+
+    &.selected{
+      color: black;
+      background-color: #e7e7e7;
+    }
+  }
+}

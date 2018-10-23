@@ -3,7 +3,8 @@ import PropTypes from "prop-types";
 
 import AssignedSelector from './AssignedSelector.container';
 import {formatDate} from '../../../assets/utils'
-import './Task.css'
+import './Task.scss'
+import Switch from "../../Switch/Switch";
 
 
 const Task = ({task, toggleDisplay, onLocateTask}) => {
@@ -18,8 +19,24 @@ const Task = ({task, toggleDisplay, onLocateTask}) => {
             <td>{task.address}</td>
             {/*<td>{task.location.latitude}</td>
             <td>{task.location.longitude}</td>*/}
-            <td><button type='button' onClick={onLocateTask} disabled={!task.display}>Locate</button></td>
-            <td><button type='button' onClick={()=>toggleDisplay(task._id)}>{task.display? 'hide':'show'}</button></td>
+            <td>
+                <button className='locate-task-btn'
+                        type='button'
+                        disabled={!task.display}
+                        onClick={onLocateTask}>
+                    <span className='locate-task-text'>Locate</span>
+                    <img className='search-icon' src='https://static.thenounproject.com/png/101791-200.png' alt=''/>
+                </button>
+            </td>
+            <td>
+                <Switch defaultValue='true'
+                        textA='Show'
+                        retValA='true'
+                        textB='Hide'
+                        retValB='false'
+                        onClick={()=>toggleDisplay(task._id)}
+                />
+            </td>
         </tr>
     );
 };

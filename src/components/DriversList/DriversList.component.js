@@ -25,11 +25,12 @@ const DriversList  = ({isLoading, drivers, onDeleteDriver, onFilterChange, onSor
                         {
                             drivers.map(driver => {
                                 return (
-                                    <DriverCard driver={driver}
-                                                key={driver._id}
-                                                onDelete={()=>onDeleteDriver(driver._id)}
-                                                onLocateDriver={()=>onLocateDriver(driver.location)}
-                                    />
+                                    <div className='driver-card-wrapper' key={driver._id}>
+                                        <DriverCard driver={driver}
+                                                    onDelete={()=>onDeleteDriver(driver._id)}
+                                                    onLocateDriver={()=>onLocateDriver(driver.location)}
+                                        />
+                                    </div>
                                 );
                             })
                         }

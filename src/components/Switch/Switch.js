@@ -1,10 +1,14 @@
 import React, {Component} from "react";
+import PropTypes from "prop-types";
 
-class TwoButtonSelector extends Component {
+import './Switch.scss'
+
+
+class Switch extends Component {
     constructor(props){
         super(props);
         this.state = {
-            selectedValue: ''
+            selectedValue: props.defaultValue
         };
     }
 
@@ -15,8 +19,9 @@ class TwoButtonSelector extends Component {
 
     renderButton = (text, retVal) => {
         return (
-            <button className={`button clickable ${retVal===this.state.selectedVal? 'selected':''}`}
+            <button className={`button ${this.state.selectedValue===retVal? 'selected':''}`}
                     type='button'
+                    disabled={this.state.selectedValue===retVal}
                     onClick={()=>this.onClick(retVal)}>
                 {text}
             </button>
@@ -26,7 +31,7 @@ class TwoButtonSelector extends Component {
     render(){
         let {textA, retValA, textB, retValB, onClick, className} = this.props;
         return(
-            <span className={className}>
+            <span className={`switch ${className? className:''}`}>
                 {
                     this.renderButton(textA, retValA, onClick)
                 }
@@ -38,4 +43,19 @@ class TwoButtonSelector extends Component {
     }
 }
 
-export default TwoButtonSelector
+Switch.propTypes = {
+    textA: PropTypes.string.isRequired,
+    textB: PropTypes.string.isRequired,
+    onClick: PropTypes.func,
+    className: PropTypes.string
+};
+
+Switch.defaultProps = {
+    defaultValue: '',
+    retValA: 'a',
+    retValB: 'b',
+    onClick: ()=>{},
+    className: '',
+};
+
+export default Switch;
