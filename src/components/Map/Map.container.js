@@ -67,7 +67,7 @@ class MapContainer extends Component {
                 {
                     isLoading ? '' :
                         <ReactBingmaps
-                            bingmapKey = "Ag19x9j8CnU4DSeAUU4LUIKDLy0yDQUw3khYUyvNZCMOKOcPNSXrB_XfYnHyweff"
+                            bingmapKey = "Enter your ket here"
                             center={this.props.center}
                             zoom={18}
                             pushPins={[...driversPins, ...tasksPins]}
